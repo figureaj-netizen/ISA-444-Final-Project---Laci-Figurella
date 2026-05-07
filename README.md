@@ -1,14 +1,39 @@
 # Forecasting the Hotel Occupancy of 17 Hotels
-This is our Final Project for ISA 444 - Business Forecasting
-
-# ISA 444 — Hotel Occupancy Forecasting Project
-**Authors:** Laci & Figurella | Miami University, Farmer School of Business
+**Authors:** Matthew Laci & Alex Figurella | Miami University, Farmer School of Business
 
 ## Overview
-This project forecasts daily hotel occupancy rates across 17 hotels using 
-a range of statistical, machine learning, and foundation models from the 
-Nixtlaverse and TimeCopilot ecosystems. We use 5-fold time-series 
-cross-validation with a 28-day horizon to compare models.
+The main problem that we sought to find during our project was figuring out what the future
+occupancy of a hotel may be 4 weeks in advance. Within our initial dataset, we started with
+information ranging from January 1st, 2022, to June 30th, 2023, covering a total of 19 hotels.
+
+After viewing the data and its included information, we found that two hotels: Hotel 77 and
+Hotel 28 contained information that indicates both hotels went out of business. These hotels were
+promptly removed from our database for more accurate reading.
+
+We also decided to include another factor in our dataset, US National Holidays. We feel that
+including this information would definitely explain an increase in hotel occupancy if our dates
+were to fall under that category (More people would take time off to go on trips during national
+holidays, as they might already be scheduled off).
+
+Following our data cleaning process, we decided to first establish some baseline models
+including a Naïve, SeasonalNaïve, AutoETS, MSTL, and AutoARIMA. For our SeasonalNaïve,
+we decided to take a last week, and a last month (last 7 days and last 30 days). Following this, we
+created a statsforecasting prediction with a daily frequency, then used it for our cross-validation
+to predict 28 days (4 weeks) in advance with 5 windows.
+
+After saving our results from our cross-validation into CSV format, we promptly fixed our
+datatypes into their respective categories. After this came the evaluation of our statsforecasting
+models against the BIAS, MAE, RMSE, and MAPE metrics (Final Results Below).
+We then moved to ML/Neural/LightGBM modeling, where we followed similar steps as 
+in the
+statsforecasting portion. We selected our ML models to be Lasso, KNN, Random Forest, and
+Light GBM. We then evaluated our results following the same metrics as prior (BIAS, MAE,
+RMSE, and MAPE). After this, we decided to evaluate once again (Final Results Below).
+
+We then move to using TimeCopilot and the Chronos, Moirai, TimesFm, and TabPFN models.
+To do so, we had to follow the same cross-validation rules set in the StatsForecast section, but
+switch the models used. Following this, we once again evaluated each model with the metrics
+assigned and gathered our final results to see a real winner.
 
 ## Dataset
 - 17 hotel time series, daily frequency
@@ -47,5 +72,4 @@ Install dependencies with:
 pip install statsforecast neuralforecast mlforecast timecopilot
 ```
 
-
-[This is the link to a public collab](https://colab.research.google.com/drive/1DeDeKUzb_QiK7au-f24IgE2nNctoHFJB?usp=sharing)
+[This is the link to the public collab](https://colab.research.google.com/drive/1DeDeKUzb_QiK7au-f24IgE2nNctoHFJB?usp=sharing)
